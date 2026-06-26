@@ -1,0 +1,59 @@
+---
+import { getCollection } from "astro:content"
+
+
+const allCategories = await getCollection('categories')
+const allProducts = await getCollection('products')
+const allExtras = await getCollection('extras')
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body>
+    <h1>Kategoriler</h1>
+    <ul>
+      {allCategories.map(category => (
+        <li>
+          {category.id}: {category.data.title} ({`src/assets/${category.id}.png`})
+        </li>
+      ))}
+    </ul>
+    
+    <h1>Urunler</h1>
+    <ul>
+      {allProducts.map(product => (
+        <li>
+          {product.id}: {product.data.title} ({product.data.category.id}) - {product.data.price}
+          {product.data.extras.length > 0 &&
+            <ul>
+              {product.data.extras.map(extra => (
+                <li>{extra.id}</li>
+              ))}
+            </ul>
+          }
+        </li>
+      ))}
+		</ul>
+    
+    <h1>Ekstralar</h1>
+    <ul>
+      {allExtras.map(extra => (
+        <li>
+          {extra.id}: {extra.data.title}
+          <ul>
+            {extra.data.items.map(item => (
+              <li>{item.title} - {item.price}</li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ul>
+  </body>
+</html>
