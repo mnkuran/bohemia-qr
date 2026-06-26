@@ -1,0 +1,42 @@
+---
+import { getCollection } from "astro:content"
+import CategoryCard from '../components/CategoryCard.astro'
+
+import "../styles/global.css"
+
+
+const allCategories = await getCollection('categories')
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body>
+    
+    <!-- TEMP -->
+    <h1>Kategoriler</h1>
+    <ul>
+      {allCategories.map(category => (
+        <li>
+          {category.id}: {category.data.title} ({`src/assets/${category.id}.png`})
+        </li>
+      ))}
+    </ul>
+    <!-- TEMP -->
+    
+    <!-- CATEGORY LISTING -->
+    <div class="grid grid-cols-2 auto-rows-[150px]">
+      {allCategories.map(category => (
+        <CategoryCard title={category.data.title} imagePath={`/src/assets/categories/${category.id}.png`} />
+      ))}
+    </div>
+    <!-- CATEGORY LISTING -->
+  
+  </body>
+</html>
