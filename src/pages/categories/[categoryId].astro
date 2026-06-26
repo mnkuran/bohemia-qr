@@ -1,0 +1,43 @@
+---
+import { getCollection } from "astro:content"
+
+import "../../styles/global.css"
+
+const { categoryId } = Astro.params;
+
+const products = await getCollection('products', ({ data }) => {
+    return data.category.id === categoryId
+})
+
+export async function getStaticPaths() {
+  return [
+    { params: { categoryId: 'sicak-kahve' } }
+  ]
+}
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body>
+    
+    <!-- TEMP -->
+    <h1>Urunler</h1>
+    <h2>{categoryId}</h2>
+    <ul>
+      {products.map(product => (
+        <li>
+          {product.id}: {product.data.title} ({product.data.price})
+        </li>
+      ))}
+    </ul>
+    <!-- TEMP -->
+  
+  </body>
+</html>

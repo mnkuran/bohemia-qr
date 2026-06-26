@@ -33,7 +33,7 @@ const allCategories = await getCollection('categories')
     <!-- CATEGORY LISTING -->
     <div class="grid grid-cols-2 auto-rows-[150px]">
       {allCategories.map(category => (
-        <CategoryCard title={category.data.title} imagePath={`/src/assets/categories/${category.id}.png`} />
+        <CategoryCard id={category.id} title={category.data.title} imagePath={`/src/assets/categories/${category.id}.png`} />
       ))}
     </div>
     <!-- CATEGORY LISTING -->
