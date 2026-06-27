@@ -11,17 +11,6 @@ const allCategories = await getCollection('categories')
 
 <BaseLayout>
   
-  <!-- TEMP -->
-  <h1>Kategoriler</h1>
-  <ul>
-    {allCategories.map(category => (
-      <li>
-        {category.id}: {category.data.title} ({`src/assets/${category.id}.png`})
-      </li>
-    ))}
-  </ul>
-  <!-- TEMP -->
-  
   <!-- CATEGORY LISTING -->
   <div class="grid grid-cols-2 auto-rows-[150px]">
     {allCategories.map(category => (

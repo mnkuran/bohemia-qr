@@ -1,10 +1,13 @@
 ---
-import { getCollection } from "astro:content"
+import { getCollection, getEntry } from "astro:content"
 
 import "../../styles/global.css"
 import BaseLayout from "../../layouts/BaseLayout.astro"
+import CategoryHero from "../../components/CategoryHero.astro"
 
 const { categoryId } = Astro.params;
+
+const category = await getEntry('categories', categoryId)!
 
 const products = await getCollection('products', ({ data }) => {
     return data.category.id === categoryId
@@ -19,16 +22,8 @@ export async function getStaticPaths() {
 
 <BaseLayout>
   
-  <!-- TEMP -->
-  <h1>Urunler</h1>
-  <h2>{categoryId}</h2>
-  <ul>
-    {products.map(product => (
-      <li>
-        {product.id}: {product.data.title} ({product.data.price})
-      </li>
-    ))}
-  </ul>
-  <!-- TEMP -->
+  <!-- HERO -->
+  <CategoryHero title={category.data.title} imagePath={`/src/assets/categories/${category.id}.png`} />
+  <!-- HERO -->
 
 </BaseLayout>

@@ -1,0 +1,21 @@
+---
+import { Image } from "astro:assets"
+
+
+const { title, imagePath } = Astro.props
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/categories/*.png')
+---
+
+<div class="h-75 border relative flex flex-col justify-between">
+  <div class="border flex p-2">
+    <a href="#" class="border p-2 rounded">{"<-"} Geri</a>
+  </div>
+  <div class="border text-center p-2">
+    <h1>{title}</h1>
+  </div>
+  {images[imagePath] ? (
+    <Image src={images[imagePath]()} alt="" class="absolute lef-0 top-0 -z-50 w-full h-full object-cover" />
+  ) : (
+    <img src="https://placehold.co/600x400" class="absolute left-0 top-0 -z-50 w-full h-full object-cover" />
+  )}
+</div>
