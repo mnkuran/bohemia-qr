@@ -3,12 +3,12 @@ import type { ImageMetadata  } from "astro"
 import { Image } from "astro:assets"
 
 
-const { title, price, imagePath } = Astro.props
+const { id, title, price, imagePath } = Astro.props
 
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/products/**/*.png')
 ---
 
-<div class="flex items-start gap-2">
+<a href={`/products/${id}`} class="flex items-start gap-2">
   {images[imagePath] &&
     <Image src={images[imagePath]()} alt="" class="w-25" width="128" height="128" />
   }
@@ -20,4 +20,4 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/product
     </div>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium officia quam porro eaque repellat incidunt pariatur exercitationem sit officiis error dolorem aliquam quidem, labore quibusdam. Ex nesciunt id laborum totam?</p>
   </div>
-</div>
+</a>

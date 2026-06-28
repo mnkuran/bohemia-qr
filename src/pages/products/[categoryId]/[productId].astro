@@ -1,0 +1,25 @@
+---
+import { getEntry } from "astro:content"
+
+import "../../../styles/global.css"
+import BaseLayout from "../../../layouts/BaseLayout.astro"
+
+const { categoryId, productId } = Astro.params;
+
+const product = await getEntry('products', `${categoryId}/${productId}`)!
+
+export async function getStaticPaths() {
+  return [
+    { params: { categoryId: 'sicak-kahve', productId: 'americano' } }
+  ]
+}
+---
+
+<BaseLayout>
+  
+  {categoryId} - {productId}
+  <br>
+  {product.data.title}
+  <br>
+
+</BaseLayout>
