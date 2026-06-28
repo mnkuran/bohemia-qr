@@ -10,7 +10,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/product
 
 <div class="flex items-start gap-2">
   {images[imagePath] &&
-    <Image src={images[imagePath]()} alt="" class="w-25" />
+    <Image src={images[imagePath]()} alt="" class="w-25" width="128" height="128" />
   }
   <div class="flex flex-col flex-1">
     <div class="flex flex-1 gap-2 items-center">
