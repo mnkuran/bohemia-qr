@@ -10,14 +10,14 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/product
 
 <a href={`/products/${id}`} class="flex items-start gap-2">
   {images[imagePath] &&
-    <Image src={images[imagePath]()} alt="" class="w-25" width="128" height="128" />
+    <Image src={images[imagePath]()} alt="" class="w-20 rounded-md" width="128" height="128" />
   }
   <div class="flex flex-col flex-1">
     <div class="flex flex-1 gap-2 items-center">
-      <h2>{title}</h2>
-      <div class="flex-1 h-px border border-dotted"></div>
-      <span>₺{price}</span>
+      <h2 class="text-terracottaDark text-2xl font-semibold tracking-wider">{title}</h2>
+      <div class="text-terracotta flex-1 h-px border border-dotted"></div>
+      <span class="text-terracottaDark text-2xl">₺{price}</span>
     </div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium officia quam porro eaque repellat incidunt pariatur exercitationem sit officiis error dolorem aliquam quidem, labore quibusdam. Ex nesciunt id laborum totam?</p>
+    <p class="text-muted text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
   </div>
 </a>

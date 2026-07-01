@@ -16,7 +16,8 @@ const products = await getCollection('products', ({ data }) => {
 
 export async function getStaticPaths() {
   return [
-    { params: { categoryId: 'sicak-kahve' } }
+    { params: { categoryId: 'sicak-kahve' } },
+    { params: { categoryId: 'soguk-kahve' } }
   ]
 }
 ---

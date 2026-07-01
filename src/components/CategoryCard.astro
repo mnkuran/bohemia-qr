@@ -8,7 +8,7 @@ const { id, title, imagePath } = Astro.props
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/categories/*.png')
 ---
 
-<a href={`/categories/${id}`} class="border relative flex items-center justify-center">
+<a href={`/categories/${id}`} class="relative flex items-center justify-center border border-terracotta rounded-lg">
   <div class="text-2xl text-white font-semibold tracking-wider text-shadow-lg bg-black/30 p-1 rounded-md">{title}</div>
   {images[imagePath] ? (
     <Image src={images[imagePath]()} alt="" class="absolute lef-0 top-0 -z-50 w-full h-full object-cover" />

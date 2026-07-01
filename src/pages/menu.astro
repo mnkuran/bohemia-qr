@@ -12,11 +12,15 @@ const allCategories = await getCollection('categories')
 <BaseLayout>
   
   <!-- CATEGORY LISTING -->
-  <div class="grid grid-cols-2 auto-rows-[150px]">
+  <div class="grid grid-cols-2 auto-rows-[150px] gap-2 p-2">
     {allCategories.map(category => (
       <CategoryCard id={category.id} title={category.data.title} imagePath={`/src/assets/categories/${category.id}.png`} />
     ))}
   </div>
   <!-- CATEGORY LISTING -->
+
+  <div class="text-center mt-4">
+    <p class="font-serif text-[20px] italic tracking-wide text-olive">Bohem ruh, iyi kahveyle büyür. <span class="text-terracotta">♡</span></p>
+  </div>
 
 </BaseLayout>

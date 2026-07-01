@@ -1,1 +1,11 @@
-@import "tailwindcss"
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f9efe2;
+  --color-ink: #2e2117;
+  --color-cream: #fff8ed;
+  --color-terracotta: #b95f32;
+  --color-terracottaDark: #8e3f22;
+  --color-muted: #786653;
+  --color-olive: #7b7a5e;
+}
