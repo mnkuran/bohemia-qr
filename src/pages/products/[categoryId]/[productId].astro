@@ -1,25 +1,52 @@
 ---
-import { getEntry } from "astro:content"
+import { getEntry, getEntries } from "astro:content"
+import type { ImageMetadata } from "astro"
+import { Image } from "astro:assets"
 
 import "../../../styles/global.css"
 import BaseLayout from "../../../layouts/BaseLayout.astro"
 
 const { categoryId, productId } = Astro.params;
-
 const product = await getEntry('products', `${categoryId}/${productId}`)!
+const extras = await getEntries(product.data.extras)
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/products/**/*.png')
+const imagePath = `/src/assets/products/${product.id}.png`
 
 export async function getStaticPaths() {
   return [
-    { params: { categoryId: 'sicak-kahve', productId: 'americano' } }
+    { params: { categoryId: 'sicak-kahve', productId: 'americano' } },
+    { params: { categoryId: 'sicak-kahve', productId: 'latte' }}
   ]
 }
 ---
 
 <BaseLayout>
   
-  {categoryId} - {productId}
-  <br>
-  {product.data.title}
-  <br>
+  <div class="p-2 flex flex-col gap-2">
+    {images[imagePath] &&
+      <Image src={images[imagePath]()} alt={product.id} class="rounded-lg w-full" />
+    }
+    <div class="rounded-2xl shadow-lg p-4">
+      <div class="flex justify-between">
+        <div>{product.data.title}</div>
+        <div>₺{product.data.price}</div>
+      </div>
+      <div>product desription...</div>
+      <div>
+
+        {extras.map(extra => (
+          <div>
+            <h2>{extra.data.title}</h2>
+            <ul>
+              {extra.data.items.map(item => (
+                <li>{item.title} (+ ₺{item.price})</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      
+      </div>
+    </div>
+  </div>
 
 </BaseLayout>
